@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import {Box, createMuiTheme, CssBaseline, MuiThemeProvider} from "@material-ui/core";
+import {BrowserRouter as Router, Route} from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import PrimaryDashboard from "./pages/PrimaryDashboard";
+import AppContextWrapper from "./AppContextWrapper";
+
+
+const theme = createMuiTheme({
+    palette: {
+        text: {
+            primary: '#4F4F4F',
+            secondary: '#000000'
+        }
+    },
+    overrides: {
+        MuiCssBaseline: {
+            "@global": {
+                body: {
+                    background:
+                        "linear-gradient(180deg, #2F80ED 0%, rgba(47, 128, 237, 0.56) 64.9%, rgba(47, 128, 237, 0.51) 100%)"
+                }
+            }
+        }
+    }
+})
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <MuiThemeProvider theme={theme}>
+            <CssBaseline/>
+            <AppContextWrapper>
+                <Router>
+                    <Box style={{height: '100vh'}}>
+                        <Route exact path='/' component={HomePage}/>
+                        <Route path='/rundown/:videoId' component={PrimaryDashboard}/>
+                    </Box>
+                </Router>
+            </AppContextWrapper>
+        </MuiThemeProvider>
+    );
 }
 
 export default App;

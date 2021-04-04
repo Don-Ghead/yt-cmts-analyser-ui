@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Youtube Rundown UI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the frontend for the Youtube Rundown project. It consumes the Youtube Rundown GraphQL API.
 
 ## Available Scripts
 
