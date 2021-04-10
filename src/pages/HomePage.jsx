@@ -1,6 +1,11 @@
-import {Box, Divider, makeStyles, Typography, withStyles} from "@material-ui/core";
+import {Box, Button, Divider, makeStyles, Typography, withStyles} from "@material-ui/core";
 import textConstants from "../textConstants";
-import SearchBar from "../components/SearchBar";
+import UrlSearchBar from "../components/UrlSearchBar";
+import {useState} from "react";
+import validator from "validator/es";
+import {useHistory} from "react-router";
+import { parse } from 'query-string';
+import Url from 'url-parse';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,10 +38,23 @@ const WhiteTextTypography = withStyles({
 
 const HomePage = () => {
     const classes = useStyles();
+    const history = useHistory();
+    const [urlFieldValue, setUrlFieldValue] = useState(undefined);
+    const [urlValidationString, setUrlValidationString] = useState(undefined);
 
-    const onSearchConfirm = () => {
-        console.log('boop');
-    }
+    const onSearchConfirm = (urlValue) => {
+        const isValid = validator.isURL(urlValue);
+        if (isValid) {
+            const parsed = new Url(urlValue)
+            const queryString = parse(parsed.query);
+            const videoId = queryString?.v;
+            if(videoId) {
+                history.push(`/rundown/${videoId}`);
+            }
+        } else {
+            setUrlValidationString(isValid ? [] : [textConstants.urlIsInvalid])
+        }
+    };
 
     return (
         <Box className={classes.root}>
@@ -52,7 +70,11 @@ const HomePage = () => {
                         {textConstants.homePageDescription}
                     </WhiteTextTypography>
                 </Box>
-                <SearchBar onSearch={onSearchConfirm}/>
+                <UrlSearchBar onSearch={onSearchConfirm} onChange={setUrlFieldValue}
+                              validationErrors={urlValidationString}/>
+                <Button onClick={() => onSearchConfirm(urlFieldValue)}>
+                    {textConstants.search}
+                </Button>
             </Box>
         </Box>
     )

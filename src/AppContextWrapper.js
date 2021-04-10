@@ -1,6 +1,4 @@
-import React, {createContext, useContext, useState} from 'react';
-import PropTypes from 'prop-types';
-import {useTheme} from "@material-ui/core";
+import React, {createContext, useContext} from 'react';
 
 const AppContext = createContext({})
 
