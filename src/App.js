@@ -6,7 +6,11 @@ import AppContextWrapper from "./AppContextWrapper";
 
 
 const theme = createMuiTheme({
+    spacing: 8,
     palette: {
+        primary: {
+            main: '#f2f2f2'
+        },
         text: {
             primary: '#4F4F4F',
             secondary: '#000000'
