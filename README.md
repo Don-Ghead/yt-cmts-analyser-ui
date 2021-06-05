@@ -1,6 +1,27 @@
 # Youtube Rundown UI
 
-This is the frontend for the Youtube Rundown project. It consumes the Youtube Rundown GraphQL API.
+This is the frontend for the Youtube Rundown project. It consumes the [Youtube Rundown GraphQL API](https://github.com/Don-Ghead/yt-cmts-analyser-gql).
+
+I originally started this project to give myself more full stack experience, creating a project from scratch. 
+The first phase includes 
+- GraphQL API
+  - Fetch data from the Google API for Youtube
+  - Data transformation & basic sentiment analysis using a JS library
+    
+- Creating a React front-end to consume this API 
+  - No Login/Accounts 
+  - Uses Material UI Component Library
+  - Two screens (Home and Dashboard)
+  - Figma Mockups (WIP)
+
+### Home    
+![img.png](res/home_mockup.png)
+
+### Dashboard
+![img_1.png](res/dashboard_mockup.png)
+
+Phase 2 is mostly going to be looking at creating a Machine Learning implementation of the sentiment analysis component. 
+Given the size of Natural Language Processing I don't intend for it to be particularly accurate, it's more so about the experience.
 
 ## Available Scripts
 
@@ -8,7 +29,7 @@ In the project directory, you can run:
 
 ### `yarn start`
 
-Runs the app in the development mode.\
+Runs the app in development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
@@ -28,16 +49,6 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
 ## Learn More
 

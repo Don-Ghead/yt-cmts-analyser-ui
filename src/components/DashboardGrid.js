@@ -6,7 +6,6 @@ import VideoEmbedWidget from "./VideoEmbedWidget";
 import {gridIds} from "../textConstants";
 import VideoDetailsWidget from "./VideoDetailsWidget";
 import VideoRatingWidget from "./VideoRatingWidget";
-import {Box} from "@material-ui/core";
 import TopCommentsPanel from "./TopCommentsPanel";
 import SentimentAnalysisPanel from "./SentimentAnalysisPanel";
 
@@ -27,7 +26,7 @@ const DashboardGrid = (props) => {
     return (
         <ReactGridLayout layout={dashboardGridLayout} {...defaultProps}>
             <div key={gridIds.videoEmbed}>
-                <VideoEmbedWidget/>
+                <VideoEmbedWidget videoId={videoId}/>
             </div>
             <div key={gridIds.videoDetails}>
                 <VideoDetailsWidget/>
