@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
+import {bool, func, string} from 'prop-types';
 import {Box, fade, makeStyles, TextField, Typography} from "@material-ui/core";
 import textConstants from "../textConstants";
 
@@ -42,31 +42,13 @@ const StyledTextField = (props) => {
 }
 
 const UrlSearchBar = (props) => {
-    const {onSearch, onChange, validationErrors} = props;
+    const {onSearch, onChange, isValid, value} = props;
     const classes = useStyles();
-    const [fieldValue, setFieldValue] = useState('');
-    const [fieldValidationElems, setFieldValidationElems] = useState(undefined);
 
-    const onFieldChange = (event) => {
-        setFieldValue(event.target.value);
-        if(onChange) {
-            onChange(event.target.value);
-        }
-    }
+    const validationText = isValid ? (
+            <Typography color="primary" align="center">{textConstants.urlIsValid}</Typography>) :
+        <Typography color="error" align="center">{textConstants.urlIsInvalid}</Typography>
 
-    React.useEffect(() => {
-        const validationStrings = () => {
-            let validationElements = undefined;
-            if (validationErrors?.length === 0) {
-                validationElements = (<Typography color="primary" align="center">{textConstants.urlIsValid}</Typography>)
-            } else if (validationErrors?.length > 0) {
-                validationElements = validationErrors.map((errorMessage) => (
-                    <Typography key={errorMessage} color="error" align="center">{errorMessage}</Typography>))
-            }
-            setFieldValidationElems(validationElements);
-        }
-        validationStrings()
-    }, [validationErrors])
 
     return (
         <Box className={classes.root}>
@@ -74,30 +56,35 @@ const UrlSearchBar = (props) => {
                 <StyledTextField
                     className={classes.margin}
                     variant="filled"
-                    value={fieldValue}
-                    onChange={onFieldChange}
+                    value={value}
+                    onChange={onChange}
                     placeholder="Search..."
                     inputProps={{
                         onKeyDown: (event) => {
                             if (event.key === 'Enter') {
-                                onSearch(fieldValue);
+                                onSearch();
                             }
                         }
                     }}/>
             </Box>
             <Box>
-                {fieldValidationElems}
+                {isValid !== null && validationText}
             </Box>
         </Box>
     );
 }
 
 UrlSearchBar.propTypes = {
-    onSearch: PropTypes.func.isRequired,
-    onChange: PropTypes.func,
-    validationErrors: PropTypes.arrayOf(PropTypes.string),
+    value: string.isRequired,
+    onSearch: func.isRequired,
+    onChange: func.isRequired,
+    isValid: bool
 }
 
-UrlSearchBar.defaultProps = {}
+UrlSearchBar.defaultProps = {
+    onChange: () => {
+    },
+    isValid: true
+}
 
 export default UrlSearchBar;

@@ -2,10 +2,10 @@ import {Box, Button, Divider, makeStyles, Typography, withStyles} from "@materia
 import textConstants from "../textConstants";
 import UrlSearchBar from "../components/UrlSearchBar";
 import {useState} from "react";
-import validator from "validator/es";
 import {useHistory} from "react-router";
-import { parse } from 'query-string';
+import {parse} from 'query-string';
 import Url from 'url-parse';
+import useUrlValidation from "../hooks/useUrlValidation";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -39,20 +39,20 @@ const WhiteTextTypography = withStyles({
 const HomePage = () => {
     const classes = useStyles();
     const history = useHistory();
-    const [urlFieldValue, setUrlFieldValue] = useState(undefined);
-    const [urlValidationString, setUrlValidationString] = useState(undefined);
+    // We use this as an intermediary, which only gets set once the Search
+    // Button has been clicked. Essentially validation is driven by explicit actions
+    const [eventDrivenIsValid, setEventDrivenIsValid] = useState(null);
+    const {urlValue, isValid, onChange} = useUrlValidation('');
 
-    const onSearchConfirm = (urlValue) => {
-        const isValid = validator.isURL(urlValue);
+    const onSearchConfirm = () => {
+        setEventDrivenIsValid(isValid);
         if (isValid) {
             const parsed = new Url(urlValue)
             const queryString = parse(parsed.query);
             const videoId = queryString?.v;
-            if(videoId) {
+            if (videoId) {
                 history.push(`/rundown/${videoId}`);
             }
-        } else {
-            setUrlValidationString(isValid ? [] : [textConstants.urlIsInvalid])
         }
     };
 
@@ -70,9 +70,12 @@ const HomePage = () => {
                         {textConstants.homePageDescription}
                     </WhiteTextTypography>
                 </Box>
-                <UrlSearchBar onSearch={onSearchConfirm} onChange={setUrlFieldValue}
-                              validationErrors={urlValidationString}/>
-                <Button onClick={() => onSearchConfirm(urlFieldValue)}>
+                <UrlSearchBar
+                    value={urlValue}
+                    onSearch={onSearchConfirm}
+                    onChange={onChange}
+                    isValid={eventDrivenIsValid}/>
+                <Button onClick={onSearchConfirm}>
                     {textConstants.search}
                 </Button>
             </Box>
