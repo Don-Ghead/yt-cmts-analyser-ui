@@ -1,8 +1,7 @@
 import React from 'react';
-import Widget from "./Widget";
+import Widget from "../Widget";
 import {string} from "prop-types";
-import YouTube from "react-youtube";
-import {Box, makeStyles, Typography} from "@material-ui/core";
+import {Box, makeStyles} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     videoContainer: {
@@ -14,9 +13,10 @@ const useStyles = makeStyles((theme) => ({
     innerWrapper: {
         position: 'absolute',
         top: 0,
-        bottom: 0,
-        right: 0,
         left: 0,
+        width: '100%',
+        height: '100%',
+        padding: theme.spacing(0, 1, 0, 1),
     }
 }))
 
@@ -27,10 +27,14 @@ const VideoEmbedWidget = (props) => {
     return (
         <Widget>
             <Box className={classes.videoContainer}>
-                <Box className={classes.innerWrapper}>
-                    <YouTube videoId={videoId} opts={{height: '100%', width: '100%'}}/>
-                </Box>
+                <iframe
+                    title='embedded Video'
+                    className={classes.innerWrapper}
+                    src={`https://www.youtube.com/embed/${videoId}`}
+                    frameBorder="0"
+                    allowFullScreen/>
             </Box>
+
         </Widget>
     );
 }

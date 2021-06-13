@@ -2,12 +2,12 @@ import React from 'react';
 import {string} from 'prop-types';
 import RGL, {WidthProvider} from "react-grid-layout";
 import {dashboardGridLayout} from "./DashboardGridLayout";
-import VideoEmbedWidget from "./VideoEmbedWidget";
+import VideoEmbedWidget from "./widgets/VideoEmbedWidget";
 import {gridIds} from "../textConstants";
-import VideoDetailsWidget from "./VideoDetailsWidget";
-import VideoRatingWidget from "./VideoRatingWidget";
-import TopCommentsPanel from "./TopCommentsPanel";
-import SentimentAnalysisPanel from "./SentimentAnalysisPanel";
+import VideoDetailsWidget from "./widgets/VideoDetailsWidget";
+import VideoRatingWidget from "./widgets/VideoRatingWidget";
+import TopCommentsPanel from "./widgets/TopCommentsPanel";
+import SentimentAnalysisPanel from "./widgets/SentimentAnalysisPanel";
 
 const ReactGridLayout = WidthProvider(RGL);
 

@@ -4,7 +4,7 @@ export const dashboardGridLayout = [
         x: 0,
         y: 0,
         w: 5,
-        h: 8,
+        h: 9,
         i: 'videoEmbed'
     },
     {

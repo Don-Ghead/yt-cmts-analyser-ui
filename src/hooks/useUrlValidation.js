@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import validator from "validator/es";
 
 const useUrlValidation = (initialValue) => {
@@ -9,4 +9,6 @@ const useUrlValidation = (initialValue) => {
         const { value } = event.target;
         setIsValid(validator.isURL(value));
     }
+
+    return {isValid, onChange}
 }

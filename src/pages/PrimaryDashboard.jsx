@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {useParams} from "react-router";
-import {AppBar, Box, makeStyles, SvgIcon} from "@material-ui/core";
+import {AppBar, Box, makeStyles} from "@material-ui/core";
 import {ReactComponent as LogoIcon} from "../resources/logoIcon.svg";
 import {ReactComponent as LogoText} from "../resources/logoText.svg";
 import DashboardGrid from "../components/DashboardGrid";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     logoContainer: {
         display: 'flex',
         alignItems: 'center',
@@ -28,7 +28,7 @@ const PrimaryDashboard = () => {
                     </Box>
                 </Box>
             </AppBar>
-            <DashboardGrid  videoId={'dank'}/>
+            <DashboardGrid  videoId={videoId}/>
         </>
     );
 }
