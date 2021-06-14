@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
     },
     description: {
         width: '80%'
+    },
+    searchButton: {
+        backgroundColor: '#2F80ED',
     }
 }))
 
@@ -75,7 +78,9 @@ const HomePage = () => {
                     onSearch={onSearchConfirm}
                     onChange={onChange}
                     isValid={eventDrivenIsValid}/>
-                <Button onClick={onSearchConfirm}>
+                <Button onClick={onSearchConfirm}
+                        variant="contained"
+                        className={classes.searchButton}>
                     {textConstants.search}
                 </Button>
             </Box>

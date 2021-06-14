@@ -45,9 +45,12 @@ const UrlSearchBar = (props) => {
     const {onSearch, onChange, isValid, value} = props;
     const classes = useStyles();
 
-    const validationText = isValid ? (
-            <Typography color="primary" align="center">{textConstants.urlIsValid}</Typography>) :
-        <Typography color="error" align="center">{textConstants.urlIsInvalid}</Typography>
+    const validationText = isValid ? <></> :
+        (<Typography color="error" fontWeight align="center" variant="h6">
+            <Box fontWeight="fontWeightBold">
+                {textConstants.urlIsInvalid}
+            </Box>
+        </Typography>)
 
 
     return (

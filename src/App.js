@@ -7,6 +7,9 @@ import AppContextWrapper from "./AppContextWrapper";
 
 const theme = createMuiTheme({
     spacing: 8,
+    typography: {
+        fontFamily: ['Calibri', 'Roboto', 'Arial', 'sans-serif'],
+    },
     palette: {
         primary: {
             main: '#f2f2f2'
@@ -16,6 +19,7 @@ const theme = createMuiTheme({
             secondary: '#000000'
         }
     },
+
     overrides: {
         MuiCssBaseline: {
             "@global": {
