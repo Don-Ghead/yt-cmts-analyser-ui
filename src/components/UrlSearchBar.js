@@ -46,17 +46,17 @@ const UrlSearchBar = (props) => {
     const classes = useStyles();
 
     const validationText = isValid ? <></> :
-        (<Typography color="error" fontWeight align="center" variant="h6">
-            <Box fontWeight="fontWeightBold">
+        (<Typography color="error" align="center" variant="h6">
+            <Box fontWeight="fontWeightBold" data-testid="validation-text">
                 {textConstants.urlIsInvalid}
             </Box>
         </Typography>)
-
 
     return (
         <Box className={classes.root}>
             <Box className={classes.searchBar}>
                 <StyledTextField
+                    data-testid="search-field"
                     className={classes.margin}
                     variant="filled"
                     value={value}
