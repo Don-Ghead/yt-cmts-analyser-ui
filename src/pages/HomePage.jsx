@@ -5,7 +5,7 @@ import {useState} from "react";
 import {useHistory} from "react-router";
 import {parse} from 'query-string';
 import Url from 'url-parse';
-import useUrlValidation from "../hooks/useUrlValidation";
+import useYoutubeUrlValidation from "../hooks/useYoutubeUrlValidation";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -42,20 +42,24 @@ const WhiteTextTypography = withStyles({
 const HomePage = () => {
     const classes = useStyles();
     const history = useHistory();
-    // We use this as an intermediary, which only gets set once the Search
-    // Button has been clicked. Essentially validation is driven by explicit actions
-    const [eventDrivenIsValid, setEventDrivenIsValid] = useState(null);
-    const {urlValue, isValid, onChange} = useUrlValidation('');
+    // While the URL is validated each time it updates, the error message is only shown
+    // to the user once they enter/search. Validation is driven by explicit actions
+    const [validationErrorMessage, setValidationErrorMessage] = useState('');
+    const {urlValue, onChange, validationText} = useYoutubeUrlValidation('');
 
     const onSearchConfirm = () => {
-        setEventDrivenIsValid(isValid);
-        if (isValid) {
+        if (!validationText) {
             const parsed = new Url(urlValue)
             const queryString = parse(parsed.query);
             const videoId = queryString?.v;
             if (videoId) {
                 history.push(`/rundown/${videoId}`);
+            } else {
+                // The URL is valid but there is an empty videoId for example
+                setValidationErrorMessage(textConstants.unableToFindVideoId)
             }
+        } else {
+            setValidationErrorMessage(validationText)
         }
     };
 
@@ -74,11 +78,14 @@ const HomePage = () => {
                     </WhiteTextTypography>
                 </Box>
                 <UrlSearchBar
+                    data-testid="search-bar"
                     value={urlValue}
                     onSearch={onSearchConfirm}
                     onChange={onChange}
-                    isValid={eventDrivenIsValid}/>
+                    validationError={validationErrorMessage}
+                />
                 <Button onClick={onSearchConfirm}
+                        data-testid="confirm-button"
                         variant="contained"
                         className={classes.searchButton}>
                     {textConstants.search}

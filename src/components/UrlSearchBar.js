@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
-import {bool, func, string} from 'prop-types';
+import React from 'react';
+import {arrayOf, func, string} from 'prop-types';
 import {Box, fade, makeStyles, TextField, Typography} from "@material-ui/core";
-import textConstants from "../textConstants";
 
 const useInputStyles = makeStyles((theme) => ({
     root: {
@@ -42,15 +41,16 @@ const StyledTextField = (props) => {
 }
 
 const UrlSearchBar = (props) => {
-    const {onSearch, onChange, isValid, value} = props;
+    const {onSearch, onChange, validationError, value} = props;
     const classes = useStyles();
 
-    const validationText = isValid ? <></> :
-        (<Typography color="error" align="center" variant="h6">
+    const validationText = !validationError ? <></> : (
+        <Typography color="error" align="center" variant="h6">
             <Box fontWeight="fontWeightBold" data-testid="validation-text">
-                {textConstants.urlIsInvalid}
+                {validationError}
             </Box>
-        </Typography>)
+        </Typography>
+    )
 
     return (
         <Box className={classes.root}>
@@ -71,7 +71,7 @@ const UrlSearchBar = (props) => {
                     }}/>
             </Box>
             <Box>
-                {isValid !== null && validationText}
+                {validationText}
             </Box>
         </Box>
     );
@@ -81,13 +81,13 @@ UrlSearchBar.propTypes = {
     value: string.isRequired,
     onSearch: func.isRequired,
     onChange: func.isRequired,
-    isValid: bool
+    validationError: string,
 }
 
 UrlSearchBar.defaultProps = {
     onChange: () => {
     },
-    isValid: true
+    validationError: ''
 }
 
 export default UrlSearchBar;
