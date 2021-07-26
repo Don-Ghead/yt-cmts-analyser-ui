@@ -6,7 +6,7 @@ import {render, fireEvent, waitFor, screen} from '@testing-library/react'
 
 // add custom jest matchers from jest-dom
 import '@testing-library/jest-dom/extend-expect'
-// the component to test
+// the component to Table
 import HomePage from './HomePage'
 import textConstants from "../textConstants";
 

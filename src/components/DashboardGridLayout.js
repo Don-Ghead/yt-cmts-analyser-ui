@@ -1,3 +1,5 @@
+import React from "react";
+
 export const dashboardGridLayout = [
     // Embed Video gridItem
     {
@@ -10,27 +12,27 @@ export const dashboardGridLayout = [
     {
         x: 5,
         y: 0,
-        w: 8,
-        h: 5,
+        w: 6,
+        h: 8,
         i: 'videoDetails'
     },
     {
-        x: 13,
+        x: 11,
         y: 0,
-        w: 3,
-        h: 5,
+        w: 5,
+        h: 9,
         i: 'videoRating'
     },
     {
         x: 0,
-        y: 5,
+        y: 8,
         w: 5,
         h: 10,
         i: 'topComments'
     },
     {
         x: 5,
-        y: 5,
+        y: 8,
         w: 11,
         h: 10,
         i: 'sentimentAnalysis'

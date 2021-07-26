@@ -1,7 +1,8 @@
 import React from 'react';
-import {makeStyles, Paper} from "@material-ui/core";
+import {string} from 'prop-types'
+import {Box, makeStyles, Paper, Typography} from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     widget: {
         display: 'flex',
         alignItems: 'center',
@@ -9,21 +10,43 @@ const useStyles = makeStyles((theme) => ({
         height: '100%',
         width: '100%'
     },
+    widgetContent: {
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        width: '100%'
+    },
+    widgetTitle: {
+        display: 'flex',
+        justifyContent: 'center'
+    }
 }))
 
 const Widget = (props) => {
-    const {children} = props;
+    const {children, title} = props;
     const classes = useStyles();
 
     return (
         <Paper className={classes.widget}>
-            {children}
+            <Box className={classes.widgetContent}>
+                {title && (
+                    <Typography variant="h3">
+                        <Box color="text.primary" className={classes.widgetTitle}>
+                            {title}
+                        </Box>
+                    </Typography>)}
+                {children}
+            </Box>
         </Paper>
     );
 }
 
-Widget.propTypes = {}
+Widget.propTypes = {
+    title: string
+}
 
-Widget.defaultProps = {}
+Widget.defaultProps = {
+    title: undefined
+}
 
 export default Widget;

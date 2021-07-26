@@ -1,0 +1,48 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+}
+
+type Channel {
+    name: String!
+    url: String!
+}
+
+type CommentWithSentiment {
+    comment: String!
+    sentiment: String!
+}
+
+type Query {
+    topLevelComments(id: String!): TopLevelCommentsInfo!
+    videoDetails(id: String!): VideoDetails
+}
+
+type SentimentSummary {
+    clearlyNegative: Int
+    clearlyPositive: Int
+    mixed: Int
+    neutral: Int
+    slightlyNegative: Int
+    slightlyPositive: Int
+}
+
+type TopLevelCommentsInfo {
+    enrichedComments: [CommentWithSentiment!]!
+    numComments: Int!
+    sentiments: SentimentSummary!
+}
+
+type VideoDetails {
+    channel: Channel!
+    channelViews: Int!
+    numComments: Int!
+    subscribers: Int!
+    title: String!
+    uploadDate: Date!
+    videoViews: Int!
+}
+
+
+scalar Date

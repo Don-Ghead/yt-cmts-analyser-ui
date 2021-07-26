@@ -5,6 +5,13 @@ const textConstants = {
     invalidYoutubeVideo: "URL is not a valid link to a youtube video",
     unableToFindVideoId: "Unable to get video ID from URL",
     search: 'Search',
+    details: 'Details',
+    channel: 'Channel',
+    subscribers: 'Subscribers',
+    total_channel_views: 'Total Channel Views',
+    video_views: 'Video Views',
+    num_comments: 'Number of Comments',
+    upload_date: 'Upload Date',
 }
 
 export const gridIds = {

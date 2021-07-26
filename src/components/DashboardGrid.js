@@ -8,11 +8,19 @@ import VideoDetailsWidget from "./widgets/VideoDetailsWidget";
 import VideoRatingWidget from "./widgets/VideoRatingWidget";
 import TopCommentsPanel from "./widgets/TopCommentsPanel";
 import SentimentAnalysisPanel from "./widgets/SentimentAnalysisPanel";
+import {useQuery} from "@apollo/client";
+import {VIDEO_DETAILS} from "../queries/widgetQueries";
 
 const ReactGridLayout = WidthProvider(RGL);
 
 const DashboardGrid = (props) => {
     const {videoId} = props;
+
+    const {data, loading, error} = useQuery(VIDEO_DETAILS, {
+        variables: {
+            id: videoId
+        }
+    });
 
     const defaultProps = {
         className: "layout",
@@ -29,7 +37,7 @@ const DashboardGrid = (props) => {
                 <VideoEmbedWidget videoId={videoId}/>
             </div>
             <div key={gridIds.videoDetails}>
-                <VideoDetailsWidget/>
+                <VideoDetailsWidget videoDetails={data?.videoDetails} loading={loading}/>
             </div>
             <div key={gridIds.videoRating}>
                 <VideoRatingWidget/>
