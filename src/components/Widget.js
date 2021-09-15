@@ -2,7 +2,7 @@ import React from 'react';
 import {string} from 'prop-types'
 import {Box, makeStyles, Paper, Typography} from "@material-ui/core";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     widget: {
         display: 'flex',
         alignItems: 'center',
@@ -14,7 +14,8 @@ const useStyles = makeStyles(() => ({
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
-        width: '100%'
+        width: '100%',
+        paddingTop: theme.spacing(1),
     },
     widgetTitle: {
         display: 'flex',

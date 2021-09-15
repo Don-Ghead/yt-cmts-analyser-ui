@@ -49,12 +49,12 @@ const VideoDetailsWidget = (props) => {
             <Box className={classes.gridContainer}>
                 <Box>
                     <VideoDetail title={textConstants.channel} value={channel.name} url={channel.url}/>
-                    <VideoDetail title={textConstants.subscribers} value={subscribers}/>
-                    <VideoDetail title={textConstants.total_channel_views} value={channelViews}/>
+                    <VideoDetail title={textConstants.subscribers} value={subscribers.toLocaleString()}/>
+                    <VideoDetail title={textConstants.total_channel_views} value={channelViews.toLocaleString()}/>
                 </Box>
                 <Box>
-                    <VideoDetail title={textConstants.video_views} alignItems='flex-end' value={videoViews}/>
-                    <VideoDetail title={textConstants.num_comments} alignItems='flex-end' value={numComments}/>
+                    <VideoDetail title={textConstants.video_views} alignItems='flex-end' value={videoViews.toLocaleString()}/>
+                    <VideoDetail title={textConstants.num_comments} alignItems='flex-end' value={numComments.toLocaleString()}/>
                     <VideoDetail title={textConstants.upload_date} alignItems='flex-end' value={formatDateTimeString(uploadDate)}/>
                 </Box>
             </Box>
