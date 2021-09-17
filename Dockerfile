@@ -1,18 +1,25 @@
-FROM node:12.22.3
+# Use the lts-alpine image digest as per dockers suggestions for a deterministic build
+FROM node@sha256:8c94a0291133e16b92be5c667e0bc35930940dfa7be544fb142e25f8e4510a45
 
 LABEL version="1.0"
 LABEL description="Base docker image for the Youtube Comments Analyser UI"
 LABEL maintainer="luketparsons@gmail.com"
 
+ENV NODE_ENV production
 WORKDIR /app
 
-COPY ["package.json", "yarn.lock", "./"]
+# Change owner to node user when copying files over
+COPY --chown=node:node ["package.json", "yarn.lock", "./"]
 
-RUN yarn install
+# --frozen-lockfile works same as `npm ci` whereby it 
+#   - Doesn't generate yarn.lock
+#   - Fails if update is needed
+RUN yarn install --production --frozen-lockfile
 
-# # Copy all working dir files to working dir of docker container
-COPY . . 
+COPY --chown=node:node . . 
 
 EXPOSE 3000
+
+USER node
 
 CMD ["yarn", "start"]
