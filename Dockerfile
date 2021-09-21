@@ -17,6 +17,7 @@ COPY --chown=node:node ["package.json", "yarn.lock", "./"]
 RUN yarn install --production --frozen-lockfile
 
 COPY --chown=node:node . . 
+RUN chown -R node:node .
 
 EXPOSE 3000
 
