@@ -33,6 +33,8 @@ const theme = createMuiTheme({
 })
 
 function App() {
+    console.log(`Creating GraphQL client at http://${process.env.REACT_APP_GQL_HOST}:4000`)
+
     return (
         <MuiThemeProvider theme={theme}>
             <CssBaseline/>

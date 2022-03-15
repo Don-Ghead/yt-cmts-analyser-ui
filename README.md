@@ -50,6 +50,28 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+## Deployment
+
+Here are some examples of docker commands to build, tag & push the image
+
+
+## `docker build -t ytrd-web .`
+
+Builds the image using the dockerfile in the current directory and tags it as ytrd-web
+
+## `docker tag ytrd-web:latest public.ecr.aws/i3k3d8g9/ytrd-web-dev:latest`
+
+Tags ytrd-web to push it to ECR
+
+## `docker push public.ecr.aws/i3k3d8g9/ytrd-web-dev:latest`
+
+Push the tagged image to ECR
+
+## `docker run -d --network="host" --name web --env GQL_HOST=0.0.0.0 ytrd-web`
+
+How to run ytrd-web image on localhost
+
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
